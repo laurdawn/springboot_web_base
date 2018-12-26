@@ -2,10 +2,10 @@
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
-    driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/tale?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+    driverClassName: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
     username: root
-    password: 123456
+    password: laurdawn@ckm
     initialSize: 20
     minIdle: 10
     maxActive: 100
@@ -15,7 +15,7 @@ mybatis:
   type-aliases-package: com.laurdawn.website.dao
   
 logging:
-  config: classpath:log4j2-dev.yml
+  config: classpath:log4j2-pro.yml
   
 server:
-  port: 8080
+  port: 8081
