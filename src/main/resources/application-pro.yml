@@ -1,9 +1,10 @@
 # db config
+
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: org.mariadb.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+    url: jdbc:mysql://106.13.11.227:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
     username: root
     password: laurdawn@ckm
     initialSize: 20
