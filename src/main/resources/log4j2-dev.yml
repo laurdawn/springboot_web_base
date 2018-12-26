@@ -1,0 +1,95 @@
+#该xml配置中,xml元素大小写不敏感
+#status="off",log4j2把自身事件记录到控制台的配置，off表示不记录，其余的记录有trace，debug，info，warn，error，fatal
+#monitorInterval表示检测更改配置的时间,单位是秒,最小间隔为5秒,0或负数表示不检测
+Configuration:
+  status: debug
+  monitorInterval: 0
+  #常量引用
+  Properties:
+    property:
+    - name: LOG_HOME
+      value: "./logs"
+    - name: FORMAT
+      value: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} : %msg%n"
+    - name: project_name
+      value: IM
+  #appender用于接收各种日志
+  Appenders:
+    #常见的输出到console,常用于开发环境中,默认是system_err,还有一个system_out
+    Console:
+      - name: "CONSOLE"
+        target: "SYSTEM_OUT"
+        PatternLayout:
+          Pattern: ${FORMAT}
+    #常用于开发环境,把日志记录到文件中,默认追加
+    RollingFile:
+      - name: DB_FILE
+        fileName: "${LOG_HOME}/db.log"
+        filePattern: "${LOG_HOME}/${date:yyyy-MM}/${project_name}-db-%d{MM-dd-yyyy}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 200
+      - name: SERVICE_FILE
+        fileName: "${LOG_HOME}/service.log"
+        filePattern: "${LOG_HOME}/${date:yyyy-MM}/${project_name}-service-%d{MM-dd-yyyy}-%i.log.gz"
+        PatternLayout:
+          pattern: "%d{yyyy-MM-dd HH:mm:ss,SSS}:%4p %t (%F:%L) - %m%n"
+        Policies:
+          SizeBasedTriggeringPolicy:
+            size: "128 MB"
+        DefaultRolloverStrategy:
+          max: 200
+
+  #接收appender
+  Loggers:
+    AsyncLogger:
+      - name: org.apache.http
+        level: warn
+      #Spring
+      - name: org.springframework
+        level: warn
+      #mybatis loggers
+      - name: com.ibatis
+        level: DEBUG
+      - name: com.ibatis.common.jdbc.SimpleDataSource
+        level: DEBUG
+      - name: com.ibatis.common.jdbc.ScriptRunner
+        level: DEBUG
+      - name: com.ibatis.sqlmap.engine.impl.SqlMapClientDelegate
+        level: DEBUG
+      #sql loggers
+      - name: druid.sql
+        level: DEBUG
+        additivity: false
+      - name: druid.sql.Connection
+        level: DEBUG
+        additivity: false
+      #对包进行更详细的配置
+      #additivity表示是否追加,防止重复,因为root已经接收过一次了
+      # - name: com.neo.dao
+      #   level: DEBUG
+      #   additivity: true
+      #   AppenderRef:
+      #     ref: console
+      - name: com.neo.controller
+        level: DEBUG
+        additivity: false
+      - name: com.neo.service
+        level: DEBUG
+        additivity: false
+# Logger节点用来单独指定日志的形式，比如要为指定包下的class指定不同的日志级别等。
+# level:日志输出级别，共有8个级别，按照从低到高为：All < Trace < Debug < Info < Warn < Error < Fatal < OFF.
+# name:用来指定该Logger所适用的类或者类所在的包全路径,继承自Root节点.
+# AppenderRef：Logger的子节点，用来指定该日志输出到哪个Appender,如果没有指定，就会默认继承自Root.
+# 如果指定了，那么会在指定的这个Appender和Root的Appender中都会输出，
+# 此时我们可以设置Logger的additivity="false"只在自定义的Appender中进行输出。
+    AsyncRoot:
+      level: debug
+      AppenderRef:
+        - ref: CONSOLE
+        # - ref: DB_FILE
+        # - ref: SERVICE_FILE

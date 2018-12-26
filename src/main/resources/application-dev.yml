@@ -15,5 +15,8 @@ mybatis:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.laurdawn.website.dao
 
+logging:
+  config: classpath:log4j2-dev.yml
+
 server:
-  port: 8080
+  port: 8081
