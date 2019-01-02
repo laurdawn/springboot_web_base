@@ -2,124 +2,76 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.laurdawn.website.dao.UserDao">
 
-  <select id="selectSimple" parameterType="com.laurdawn.website.entity.User" resultType="com.laurdawn.website.entity.User">
-    select * from test
+  <sql id="User_Clause">
+  	id,
+  	phone,
+  	roleId
+  </sql>
+
+  <select id="selectEntityById" parameterType="java.lang.Integer" resultType="com.laurdawn.website.entity.User">
+    select 
+	<include refid="User_Clause"></include>
+	from s_user
+    where id = #{id, jdbcType=INTEGER}
   </select>
   
-  <!-- <delete id="deleteByExample" parameterType="com.laurdawn.website.entity.UserVoExample">
-    delete from t_users
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete> -->
-  <!-- <insert id="insert" parameterType="com.laurdawn.website.entity.UserVo" useGeneratedKeys="true" keyProperty="uid">
-    insert into t_users (uid, username, password, 
-      email, home_url, screen_name, 
-      created, activated, logged, 
-      group_name)
-    values (#{uid,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{email,jdbcType=VARCHAR}, #{homeUrl,jdbcType=VARCHAR}, #{screenName,jdbcType=VARCHAR}, 
-      #{created,jdbcType=INTEGER}, #{activated,jdbcType=INTEGER}, #{logged,jdbcType=INTEGER}, 
-      #{groupName,jdbcType=VARCHAR})
-  </insert> -->
-  <!-- <insert id="insertSelective" parameterType="com.laurdawn.website.entity.UserVo" useGeneratedKeys="true" keyProperty="uid">
-    insert into t_users
+  <select id="selectUserByPhone" parameterType="java.lang.String" resultType="com.laurdawn.website.entity.User">
+    select 
+	<include refid="User_Clause"></include>
+	from s_user
+    where phone = #{phone, jdbcType=VARCHAR}
+  </select>
+  
+  <delete id="deleteEntityById" parameterType="java.lang.Integer">
+    delete from s_user
+    where id = #{id, jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insertEntity" parameterType="com.laurdawn.website.entity.User">
+    insert into s_user
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        uid,
-      </if>
-      <if test="username != null">
-        username,
+      <if test="phone != null">
+        phone,
       </if>
       <if test="password != null">
         password,
       </if>
-      <if test="email != null">
-        email,
-      </if>
-      <if test="homeUrl != null">
-        home_url,
-      </if>
-      <if test="screenName != null">
-        screen_name,
-      </if>
-      <if test="created != null">
-        created,
-      </if>
-      <if test="activated != null">
-        activated,
-      </if>
-      <if test="logged != null">
-        logged,
-      </if>
-      <if test="groupName != null">
-        group_name,
+      <if test="roleId != null">
+        roleId,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="uid != null">
-        #{uid,jdbcType=INTEGER},
-      </if>
-      <if test="username != null">
-        #{username,jdbcType=VARCHAR},
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         #{password,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="homeUrl != null">
-        #{homeUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="screenName != null">
-        #{screenName,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null">
-        #{created,jdbcType=INTEGER},
-      </if>
-      <if test="activated != null">
-        #{activated,jdbcType=INTEGER},
-      </if>
-      <if test="logged != null">
-        #{logged,jdbcType=INTEGER},
-      </if>
-      <if test="groupName != null">
-        #{groupName,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        #{roleId,jdbcType=INTEGER},
       </if>
     </trim>
-  </insert> -->
-  <!-- <update id="updateByPrimaryKeySelective" parameterType="com.laurdawn.website.entity.UserVo">
-    update t_users
+  </insert>
+  <update id="updateEntityById" parameterType="com.laurdawn.website.entity.User">
+    update s_user
     <set>
-      <if test="username != null">
-        username = #{username,jdbcType=VARCHAR},
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
       </if>
       <if test="password != null">
         password = #{password,jdbcType=VARCHAR},
       </if>
-      <if test="email != null">
-        email = #{email,jdbcType=VARCHAR},
-      </if>
-      <if test="homeUrl != null">
-        home_url = #{homeUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="screenName != null">
-        screen_name = #{screenName,jdbcType=VARCHAR},
-      </if>
-      <if test="created != null">
-        created = #{created,jdbcType=INTEGER},
-      </if>
-      <if test="activated != null">
-        activated = #{activated,jdbcType=INTEGER},
-      </if>
-      <if test="logged != null">
-        logged = #{logged,jdbcType=INTEGER},
-      </if>
-      <if test="groupName != null">
-        group_name = #{groupName,jdbcType=VARCHAR},
+      <if test="roleId != null">
+        roleId = #{password,jdbcType=INTEGER},
       </if>
     </set>
-    where uid = #{uid,jdbcType=INTEGER}
-  </update> -->
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+  <select id="selectAll" resultType="com.laurdawn.website.entity.User">
+  	select
+  	<include refid="User_Clause"></include>
+  	from s_user
+  </select>
+  
 </mapper>

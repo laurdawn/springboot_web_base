@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laurdawn.website.dao.RoleMenuDao">
+
+  <resultMap type="com.laurdawn.website.entity.RoleMenu" id="RolePermissionMap">
+  	<id property="id" column="id" />
+  	<result property="roleId" column="roleId"/>
+  	<result property="menuId" column="menuId"/>
+  	<collection property="Menu" column="menuId" javaType="ArrayList" ofType="com.laurdawn.website.entity.Menu"
+  		select="selectEntityById"></collection>
+  </resultMap>
+
+  <sql id="Menu_Clause">
+  	menuId,
+  	name,
+  	parentId,
+  	url,
+  	order
+  </sql>
+
+  <select id="selectEntityById" parameterType="java.lang.Integer" resultType="com.laurdawn.website.entity.Menu">
+    select 
+	<include refid="Menu_Clause"></include>
+	from s_menu
+    where menuId = #{menuId, jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" resultType="com.laurdawn.website.entity.Menu">
+  	select
+  	<include refid="Menu_Clause"></include>
+  	from s_menu
+  </select>
+  
+  <select id="selectRolePermissionByRoleId" resultMap="RolePermissionMap">
+  	select
+  	id,
+  	roleId,
+  	menuId
+  	from s_role_menu
+  	where roleId = #{roleId, jdbcType=INTEGER}
+  </select>
+  
+  <delete id="deleteRolePermissionByRoleId" parameterType="">
+  	delete from s_role_menu
+  	where roleId = #{role, jdbcType=INTEGER}
+  </delete>
+  
+</mapper>

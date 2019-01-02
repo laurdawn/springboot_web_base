@@ -23,8 +23,8 @@ import com.laurdawn.website.utils.UUID;
  * 自定义拦截器
  */
 @Component
-public class BaseInterceptor implements HandlerInterceptor {
-    private static final Logger LOGGE = LoggerFactory.getLogger(BaseInterceptor.class);
+public class LoginInterceptor implements HandlerInterceptor {
+    private static final Logger Logging = LoggerFactory.getLogger(LoginInterceptor.class);
     private static final String USER_AGENT = "user-agent";
 
     @Resource
@@ -44,30 +44,21 @@ public class BaseInterceptor implements HandlerInterceptor {
         // System.out.println(contextPath);
         String uri = request.getRequestURI();
 
-        LOGGE.info("UserAgent: {}", request.getHeader(USER_AGENT));
-        LOGGE.info("用户访问地址: {}, 来路地址: {}", uri, IPKit.getIpAddrByRequest(request));
+        Logging.info("UserAgent: {}", request.getHeader(USER_AGENT));
+        Logging.info("用户访问地址: {}, 来路地址: {}", uri, IPKit.getIpAddrByRequest(request));
 
 
         //请求拦截处理
         User user = TaleUtils.getLoginUser(request);
         if (null == user) {
-            Integer uid = TaleUtils.getCookieUid(request);
-            if (null != uid) {
+            Integer id = TaleUtils.getCookieId(request);
+            if (null != id) {
                 //这里还是有安全隐患,cookie是可以伪造的
-                user = userService.queryUserById(uid);
+                user = userService.queryUserById(id);
                 request.getSession().setAttribute(WebConst.LOGIN_SESSION_KEY, user);
+            } else {
+            	return false;
             }
-        }
-        if (uri.startsWith(contextPath + "/admin") && !uri.startsWith(contextPath + "/admin/login") && null == user) {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
-            return false;
-        }
-        //设置get请求的token
-        if (request.getMethod().equals("GET")) {
-            String csrf_token = UUID.UU64();
-            // 默认存储30分钟
-            cache.hset(Types.CSRF_TOKEN.getType(), csrf_token, uri, 30 * 60);
-            request.setAttribute("_csrf_token", csrf_token);
         }
         return true;
     }

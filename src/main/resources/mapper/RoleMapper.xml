@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.laurdawn.website.dao.RoleDao">
+
+  <sql id="Role_Clause">
+  	id,
+  	roleName
+  </sql>
+
+  <select id="selectEntityById" parameterType="java.lang.Integer" resultType="com.laurdawn.website.entity.Role">
+    select 
+	<include refid="Role_Clause"></include>
+	from s_role
+    where id = #{id, jdbcType=INTEGER}
+  </select>
+  
+  <select id="selectAll" resultType="com.laurdawn.website.entity.Role">
+  	select
+  	<include refid="Role_Clause"></include>
+  	from s_role
+  </select>
+  
+  <delete id="deleteEntityById" parameterType="java.lang.Integer">
+    delete from s_role
+    where id = #{id, jdbcType=INTEGER}
+  </delete>
+  
+  <insert id="insertEntity" parameterType="com.laurdawn.website.entity.Role">
+    insert into s_role
+    (
+    roleName
+    )
+    values
+    (
+    #{roleName, jdbcType=VARCHAR}
+    )
+  </insert>
+  
+  <update id="updateEntityById" parameterType="com.laurdawn.website.entity.Role">
+    update s_role
+    set
+    roleName = #{roleName, jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

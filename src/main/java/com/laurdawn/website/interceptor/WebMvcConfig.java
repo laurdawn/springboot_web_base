@@ -1,31 +1,34 @@
 package com.laurdawn.website.interceptor;
 
 
-import javax.annotation.Resource;
-
-import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 /**
  * 向mvc中添加自定义组件
  */
-@Component
+@Configuration
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-    @Resource
-    private BaseInterceptor baseInterceptor;
+	
+	/**
+	 * 登录拦截器
+	 */
+    @Autowired
+    private LoginInterceptor loginTerceptor;
+    
+    @Autowired
+    private PermissionInterceptor permissionInterceptor;
+    
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(baseInterceptor);
+        registry.addInterceptor(loginTerceptor)
+        .addPathPatterns("/**")
+        .excludePathPatterns("/login", "/logout","/test");
+        registry.addInterceptor(permissionInterceptor)
+        .addPathPatterns("/**")
+        .excludePathPatterns("/login", "/logout","/test");
     }
 
-    /**
-     * 添加静态资源文件，外部可以直接访问地址
-     * @param registry
-     */
-//    @Override
-//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-//        registry.addResourceHandler("/upload/**").addResourceLocations("file:"+ TaleUtils.getUploadFilePath()+"upload/");
-//        super.addResourceHandlers(registry);
-//    }
 }

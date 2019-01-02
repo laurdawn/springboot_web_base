@@ -1,5 +1,8 @@
 package com.laurdawn.website.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.laurdawn.website.entity.Result;
+import com.laurdawn.website.enums.EResultType;
 import com.laurdawn.website.exception.TipException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +20,7 @@ public class GlobalExceptionHandler {
     public String tipException(Exception e) {
         LOGGER.error("find exception:e={}",e.getMessage());
         e.printStackTrace();
-        return "comm/error_500";
+        return JSON.toJSONString(new Result(EResultType.ERROR));
     }
 
 
@@ -25,6 +28,6 @@ public class GlobalExceptionHandler {
     public String exception(Exception e){
         LOGGER.error("find exception:e={}",e.getMessage());
         e.printStackTrace();
-        return "comm/error_404";
+        return JSON.toJSONString(new Result(EResultType.ERROR));
     }
 }

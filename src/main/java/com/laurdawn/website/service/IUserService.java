@@ -2,8 +2,6 @@ package com.laurdawn.website.service;
 
 import com.laurdawn.website.entity.User;
 
-/**
- */
 public interface IUserService {
 
     /**
@@ -13,14 +11,14 @@ public interface IUserService {
      * @return 主键
      */
 
-//    Integer insertUser(User userVo);
+    Integer saveUser(User user);
 
     /**
-     * 通过uid查找对象
-     * @param uid
+     * 通过id查找对象
+     * @param id
      * @return
      */
-    User queryUserById(Integer uid);
+    User queryUserById(Integer id);
 
     /**
      * 用戶登录
@@ -28,12 +26,12 @@ public interface IUserService {
      * @param password
      * @return
      */
-    User login(String username, String password);
+    User login(String phone, String password);
 
     /**
      * 根据主键更新user对象
-     * @param userVo
+     * @param user
      * @return
      */
-    void updateByUid(User userVo);
+    void updateById(User user);
 }

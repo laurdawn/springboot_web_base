@@ -138,13 +138,13 @@ public class TaleUtils {
      * @param request
      * @return
      */
-    public static Integer getCookieUid(HttpServletRequest request) {
+    public static Integer getCookieId(HttpServletRequest request) {
         if (null != request) {
             Cookie cookie = cookieRaw(WebConst.USER_IN_COOKIE, request);
             if (cookie != null && cookie.getValue() != null) {
                 try {
-                    String uid = Tools.deAes(cookie.getValue(), WebConst.AES_SALT);
-                    return StringUtils.isNotBlank(uid) && Tools.isNumber(uid) ? Integer.valueOf(uid) : null;
+                    String id = Tools.deAes(cookie.getValue(), WebConst.AES_SALT);
+                    return StringUtils.isNotBlank(id) && Tools.isNumber(id) ? Integer.valueOf(id) : null;
                 } catch (Exception e) {
                 }
             }
@@ -176,11 +176,11 @@ public class TaleUtils {
      * 设置记住密码cookie
      *
      * @param response
-     * @param uid
+     * @param id
      */
-    public static void setCookie(HttpServletResponse response, Integer uid) {
+    public static void setCookie(HttpServletResponse response, Integer id) {
         try {
-            String val = Tools.enAes(uid.toString(), WebConst.AES_SALT);
+            String val = Tools.enAes(id.toString(), WebConst.AES_SALT);
             boolean isSSL = false;
             Cookie cookie = new Cookie(WebConst.USER_IN_COOKIE, val);
             cookie.setPath("/");
