@@ -3,8 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.laurdawn.website</groupId>
-    <artifactId>SystemA</artifactId>
+    <groupId>com.laurdawn</groupId>
+    <artifactId>springboot_base</artifactId>
     <!-- now -->
     <version>1.0.0</version>
     <!-- version的时间节点-->
@@ -16,8 +16,8 @@
     <!--<version>2.0.1-SNAPSHOT</version>-->
     <packaging>jar</packaging>
 
-    <name>SystemA</name>
-    <description>SystemA</description>
+    <name>springboot_base</name>
+    <description>springboot_base</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
