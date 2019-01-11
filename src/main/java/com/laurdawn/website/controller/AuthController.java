@@ -27,10 +27,7 @@ public class AuthController extends BaseController {
     @Autowired
     private IUserService userService;
     
-    @RequestMapping("/test")
-    private String test() {
-    	return "这是test";	
-    }
+
     
     @GetMapping("/login")
     public String login(User entity, HttpServletRequest request, HttpServletResponse response){
