@@ -121,49 +121,55 @@
     </dependencies>
 
     <!-- 普通的maven打包方式 -->
-    <build>
+    <!-- <build>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build> -->
+    <!-- 普通的maven打包方式 -->
+
+    <!-- 结合docker-compose的maven打包方式,并运行镜像 -->
+    <build>
+    	<finalName>springboot_base</finalName>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>com.dkanejs.maven.plugins</groupId>
+                <artifactId>docker-compose-maven-plugin</artifactId>
+                <version>2.3.0</version>
+                <executions>
+                	<execution>
+                		<id>down</id>
+                		<phase>verify</phase>
+                		<goals>
+                			<goal>down</goal>
+                		</goals>
+                		<configuration>
+                			<composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                			<host>unix:///var/run/docker.sock</host>
+                		</configuration>
+                	</execution>
+                	<execution>
+                		<id>up</id>
+                		<phase>verify</phase>
+                		<goals>
+                			<goal>up</goal>
+                		</goals>
+                		<configuration>
+                			<composeFile>${project.basedir}/docker-compose.yml</composeFile>
+                			<detachedMode>true</detachedMode>
+                			<host>unix:///var/run/docker.sock</host>
+                		</configuration>
+                	</execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
-    <!-- 普通的maven打包方式 -->
-
-    <!-- 结合docker的maven打包方式,并上传提交创建的镜像 -->
-    <!--<build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-            <plugin>
-                <groupId>com.spotify</groupId>
-                <artifactId>docker-maven-plugin</artifactId>
-                <version>${docker.plugin.version}</version>
-                <executions>
-                    <execution>
-                        <phase>install</phase>
-                        <goals>
-                            <goal>build</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <imageName>${docker.image.prefix}/${project.artifactId}</imageName>
-                    <dockerDirectory>${project.basedir}/docker-extension/Project</dockerDirectory>
-                    <resources>
-                        <resource>
-                            <targetPath>/</targetPath>
-                            <directory>${project.build.directory}</directory>
-                            <include>${project.build.finalName}.jar</include>
-                        </resource>
-                    </resources>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>-->
-    <!-- 结合docker的maven打包方式,并上传提交创建的镜像 -->
 
 </project>
