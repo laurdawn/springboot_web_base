@@ -8,5 +8,5 @@ services:
     working_dir: /usr/src/myapp
     volumes:
       - ./target/springboot_base.jar:/usr/src/myapp/springboot_base.jar
-      #- /var/run/docker.sock:/var/run/docker.sock
+      - /var/run/docker.sock:/var/run/docker.sock
     command: java -jar springboot_base.jar
