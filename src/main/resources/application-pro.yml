@@ -1,5 +1,3 @@
-# db config
-
 spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
