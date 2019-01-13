@@ -1305,3 +1305,10 @@ Caused by: java.net.ConnectException: Connection refused: connect
 2018-12-26 17:07:09,911:INFO main (:) - Starting ProtocolHandler [http-nio-8081]
 2018-12-26 17:07:09,922:INFO main (:) - Using a shared selector for servlet write/read
 2018-12-26 17:07:09,950:INFO main (:) - Started CoreApplication in 8.627 seconds (JVM running for 9.135)
+2019-01-13 10:34:51,840:INFO main (:) - Starting CoreApplication on BF-20170930MKEC with PID 9512 (C:\Users\Administrator.BF-20170930MKEC\Desktop\project\springboot_web_base\target\classes started by laurdawn in C:\Users\Administrator.BF-20170930MKEC\Desktop\project\springboot_web_base)
+2019-01-13 10:34:51,868:INFO main (:) - The following profiles are active: pro
+2019-01-13 10:34:52,494:INFO background-preinit (:) - HV000001: Hibernate Validator 5.3.4.Final
+2019-01-13 10:34:57,213:INFO main (:) - Starting service Tomcat
+2019-01-13 10:34:57,217:INFO main (:) - Starting Servlet Engine: Apache Tomcat/8.5.11
+2019-01-13 10:34:57,567:INFO localhost-startStop-1 (:) - Initializing Spring embedded WebApplicationContext
+2019-01-13 10:34:59,273:ERROR main (:) - testWhileIdle is true, validationQuery not set
