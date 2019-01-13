@@ -12,7 +12,7 @@ public class TestController {
 
     @RequestMapping("/test")
     private String test() {
-    	return "这是test";	
+    	return "这是test by used docker";	
     }
 	
 }
