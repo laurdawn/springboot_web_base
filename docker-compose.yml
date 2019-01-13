@@ -10,7 +10,6 @@ services:
       - /dk_compose/jenkins/home/workspace/springboot_base/target/springboot_base.jar:/usr/src/myapp/springboot_base.jar
     command: java -jar springboot_base.jar
     networks:
-      - default
       - mariadb
 networks:
   mariadb:

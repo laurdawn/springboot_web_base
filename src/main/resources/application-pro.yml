@@ -4,7 +4,7 @@ spring:
     driverClassName: org.mariadb.jdbc.Driver
     url: jdbc:mariadb://mariadb:3306/test?useSSL=false&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&autoReconnect=true
     username: root
-    password: 123456
+    password: laurdawn@ckm
     initialSize: 20
     minIdle: 10
     maxActive: 100
