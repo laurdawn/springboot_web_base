@@ -163,8 +163,7 @@
                 		</goals>
                 		<configuration>
                 			<composeFile>${project.basedir}/docker-compose.yml</composeFile>
-                			<detachedMode>true</detachedMode>
-                			<verbose>true</verbose>
+                			<!-- <detachedMode>true</detachedMode> -->
                 			<host>unix:///var/run/docker.sock</host>
                 		</configuration>
                 	</execution>
