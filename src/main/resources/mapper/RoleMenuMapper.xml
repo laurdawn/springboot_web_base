@@ -31,7 +31,7 @@
   	from s_menu
   </select>
   
-  <select id="selectRolePermissionByRoleId" resultMap="RolePermissionMap">
+  <select id="selectRolePermissionByRoleId" parameterType="java.lang.Integer" resultMap="RolePermissionMap">
   	select
   	id,
   	roleId,
@@ -40,7 +40,7 @@
   	where roleId = #{roleId, jdbcType=INTEGER}
   </select>
   
-  <delete id="deleteRolePermissionByRoleId" parameterType="">
+  <delete id="deleteRolePermissionByRoleId" parameterType="java.lang.Integer">
   	delete from s_role_menu
   	where roleId = #{role, jdbcType=INTEGER}
   </delete>

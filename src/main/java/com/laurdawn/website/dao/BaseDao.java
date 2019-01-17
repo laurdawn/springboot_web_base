@@ -1,29 +1,36 @@
 package com.laurdawn.website.dao;
 
+import java.util.List;
+
 public interface BaseDao<T> {
 
-
+//注释掉的和mybatis generator搭配
     /**
      * 根据Id查询实体
      */
-	public T selectByPrimaryKey(int id);
+	T selectEntityById(int id);
+//	public T selectByPrimaryKey(int id);
 	
     /**
      * 新增实体
      */
-	public void insert(T entity);
-	public void insertSelective(T entity);
+	void insertEntity(T entity);
+//	public void insert(T entity);
+//	public void insertSelective(T entity);
 	
     /**
      * 更新实体
      */
-	public int updateByPrimaryKeySelective(T entity);
-	public int updateByPrimaryKey(T entity);
+	int updateEntityById(T entity);
+//	public int updateByPrimaryKeySelective(T entity);
+//	public int updateByPrimaryKey(T entity);
 	
     /**
      * 根据Id删除实体
      */
-	public int deleteByPrimaryKey(int id);
+	int deleteEntityById(int id);
+//	public int deleteByPrimaryKey(int id);
 
+	List<T> selectAll();
 
 }

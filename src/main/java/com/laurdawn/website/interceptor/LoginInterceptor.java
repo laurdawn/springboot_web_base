@@ -11,13 +11,11 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.laurdawn.website.constant.WebConst;
-import com.laurdawn.website.dto.Types;
 import com.laurdawn.website.entity.User;
 import com.laurdawn.website.service.IUserService;
 import com.laurdawn.website.utils.IPKit;
 import com.laurdawn.website.utils.MapCache;
 import com.laurdawn.website.utils.TaleUtils;
-import com.laurdawn.website.utils.UUID;
 
 /**
  * 自定义拦截器
