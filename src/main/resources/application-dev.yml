@@ -21,6 +21,10 @@ spring:
       max-idle: 8
       min-idle: 0
     timeout: 1000
+  cache:
+    type: ehcache
+    ehcache:
+      config: classpath:/ehcache.xml
 
 mybatis:
   mapper-locations: classpath:mapper/*.xml

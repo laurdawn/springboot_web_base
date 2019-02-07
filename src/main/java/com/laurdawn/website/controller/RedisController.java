@@ -11,6 +11,7 @@ import com.laurdawn.website.utils.RedisUtil;
 * @version 2019年1月11日 下午4:31:24 
 */
 @RestController
+@RequestMapping("/redis")
 public class RedisController {
 	
 //	@Resource
