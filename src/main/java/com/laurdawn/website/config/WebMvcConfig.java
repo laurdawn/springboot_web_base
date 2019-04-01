@@ -10,8 +10,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import com.laurdawn.website.interceptor.LoginInterceptor;
 import com.laurdawn.website.interceptor.PermissionInterceptor;
@@ -20,7 +19,7 @@ import com.laurdawn.website.interceptor.PermissionInterceptor;
  * 向mvc中添加自定义组件
  */
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurationSupport {
+public class WebMvcConfig implements WebMvcConfigurer {
 	
 	/**
 	 * 登录拦截器
