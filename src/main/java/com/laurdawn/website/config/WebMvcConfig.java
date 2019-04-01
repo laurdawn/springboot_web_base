@@ -1,9 +1,16 @@
 package com.laurdawn.website.config;
 
 
+import java.nio.charset.StandardCharsets;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.converter.HttpMessageConverter;
+import org.springframework.http.converter.StringHttpMessageConverter;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
 import com.laurdawn.website.interceptor.LoginInterceptor;
@@ -13,7 +20,7 @@ import com.laurdawn.website.interceptor.PermissionInterceptor;
  * 向mvc中添加自定义组件
  */
 @Configuration
-public class WebMvcConfig extends WebMvcConfigurerAdapter {
+public class WebMvcConfig extends WebMvcConfigurationSupport {
 	
 	/**
 	 * 登录拦截器
@@ -32,6 +39,17 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addInterceptor(permissionInterceptor)
         .addPathPatterns("/**")
         .excludePathPatterns("/login", "/logout","/test");
+    }
+    
+    @Bean
+    public HttpMessageConverter<String> responseBodyStringConverter() {
+        StringHttpMessageConverter converter = new StringHttpMessageConverter(StandardCharsets.UTF_8);
+        return converter;
+    }
+
+    @Override
+    public void configureMessageConverters(List<HttpMessageConverter<?>> converters){
+        converters.add(responseBodyStringConverter());
     }
 
 }
