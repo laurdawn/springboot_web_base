@@ -68,7 +68,7 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
-  <select id="selectAll" resultType="com.laurdawn.website.entity.User">
+  <select id="selectAll" parameterType="com.laurdawn.website.entity.User" resultType="com.laurdawn.website.entity.User">
   	select
   	<include refid="User_Clause"></include>
   	from s_user

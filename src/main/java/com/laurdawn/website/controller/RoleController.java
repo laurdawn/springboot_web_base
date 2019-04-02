@@ -1,13 +1,12 @@
 package com.laurdawn.website.controller;
 
-import java.util.List;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.github.pagehelper.PageInfo;
 import com.laurdawn.website.entity.Role;
 import com.laurdawn.website.enums.EResultType;
 import com.laurdawn.website.service.IRoleService;
@@ -21,7 +20,7 @@ import com.laurdawn.website.service.IRoleService;
 @RequestMapping("/role")
 public class RoleController extends BaseController {
 	
-    private static final Logger LOGGER = LoggerFactory.getLogger(RoleController.class);
+    private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
     @Autowired
     private IRoleService roleService;
@@ -42,8 +41,8 @@ public class RoleController extends BaseController {
      * @return
      */
     @RequestMapping("/getAll")
-    public String getAll(){
-    	List<Role> allRole = roleService.findAllRole();
+    public String getAll(Role record){
+    	PageInfo<Role> allRole = roleService.findAllRole(record);
     	return retResultData(EResultType.SUCCESS, allRole);
     }
     

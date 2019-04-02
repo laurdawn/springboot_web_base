@@ -32,12 +32,12 @@ public class WebMvcConfig implements WebMvcConfigurer {
     
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(loginTerceptor)
-        .addPathPatterns("/**")
-        .excludePathPatterns("/login", "/logout","/test");
-        registry.addInterceptor(permissionInterceptor)
-        .addPathPatterns("/**")
-        .excludePathPatterns("/login", "/logout","/test");
+//        registry.addInterceptor(loginTerceptor)
+//        .addPathPatterns("/**")
+//        .excludePathPatterns("/login", "/logout","/test");
+//        registry.addInterceptor(permissionInterceptor)
+//        .addPathPatterns("/**")
+//        .excludePathPatterns("/login", "/logout","/test");
     }
     
     @Bean

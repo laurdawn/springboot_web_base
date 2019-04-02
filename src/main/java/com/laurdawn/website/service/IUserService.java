@@ -1,5 +1,7 @@
 package com.laurdawn.website.service;
 
+import java.util.List;
+
 import com.laurdawn.website.entity.User;
 
 public interface IUserService {
@@ -34,4 +36,6 @@ public interface IUserService {
      * @return
      */
     void updateById(User user);
+
+	List<User> findAll(User user);
 }

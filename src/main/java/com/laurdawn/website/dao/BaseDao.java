@@ -31,6 +31,6 @@ public interface BaseDao<T> {
 	int deleteEntityById(int id);
 //	public int deleteByPrimaryKey(int id);
 
-	List<T> selectAll();
+	List<T> selectAll(T entity);
 
 }

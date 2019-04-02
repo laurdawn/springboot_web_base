@@ -1,7 +1,6 @@
 package com.laurdawn.website.service;
 
-import java.util.List;
-
+import com.github.pagehelper.PageInfo;
 import com.laurdawn.website.entity.Role;
 
 /** 
@@ -12,12 +11,12 @@ public interface IRoleService {
 
 	Role findById(int id);
 	
-	List<Role> findAllRole();
-	
 	void saveRole(Role entity);
 	
 	void modifyRole(Role entity);
 	
 	void deleteRole(int id);
+
+	PageInfo<Role> findAllRole(Role entity);
 	
 }

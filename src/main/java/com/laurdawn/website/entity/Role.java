@@ -4,7 +4,7 @@ package com.laurdawn.website.entity;
 * @author  laurdawn 
 * @version 2019年1月2日 上午11:51:26 
 */
-public class Role {
+public class Role extends BaseEntity{
 
 	private Integer id;
 	

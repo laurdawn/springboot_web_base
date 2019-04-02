@@ -1,5 +1,7 @@
 package com.laurdawn.website.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -83,5 +85,10 @@ public class UserServiceImpl implements IUserService {
         	throw new TipException("phone or password is null.");
         }
         return user.getId();
+	}
+	
+	@Override
+	public List<User> findAll(User user){
+		return userDao.selectAll(user);
 	}
 }

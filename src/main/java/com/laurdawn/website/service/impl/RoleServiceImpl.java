@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.laurdawn.website.dao.RoleDao;
 import com.laurdawn.website.dao.RoleMenuDao;
 import com.laurdawn.website.entity.Role;
@@ -36,8 +38,11 @@ public class RoleServiceImpl implements IRoleService{
 	 * 查询所有角色
 	 */
 	@Override
-	public List<Role> findAllRole() {
-		return roleDao.selectAll();
+	public PageInfo<Role> findAllRole(Role entity) {
+//		PageHelper.startPage(1, 10);
+		List<Role> list = roleDao.selectAll(entity);
+		PageInfo<Role> page = new PageInfo<Role>(list);
+		return page;
 	}
 
 	/**
